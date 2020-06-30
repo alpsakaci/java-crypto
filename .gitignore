@@ -37,3 +37,4 @@ out/
 /bootstrap
 /dependencies.xml
 .java-version
+.vscode/settings.json
