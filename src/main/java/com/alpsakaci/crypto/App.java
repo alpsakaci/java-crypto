@@ -1,4 +1,4 @@
-package com.alpsakaci;
+package com.alpsakaci.crypto;
 
 import java.security.KeyPair;
 
