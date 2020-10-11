@@ -65,7 +65,7 @@ public class AppTest {
     
     @Test
     public void rsaEncryptTest() {
-    	KeyPair keyPair = RSA.generateKey();
+		KeyPair keyPair = RSA.generateKey();
 		String encryptedText = RSA.encrypt("plaintext", keyPair.getPublic());
 		assertNotNull(encryptedText);
 		LOG.info("Text encrypted: " + encryptedText);
@@ -73,7 +73,7 @@ public class AppTest {
     
     @Test
     public void rsaDecryptTest() {
-    	KeyPair keyPair = RSA.generateKey();
+		KeyPair keyPair = RSA.generateKey();
 		String encryptedText = RSA.encrypt("plaintext", keyPair.getPublic());
 		
 		String decryptedText = RSA.decrypt(encryptedText, keyPair.getPrivate());
@@ -83,8 +83,8 @@ public class AppTest {
     
     @Test
     public void pbkdf2GenerateKeyTest() {
-    	String password = "secret";
-    	String salt = Hashing.generateSalt();
+		String password = "secret";
+		String salt = Hashing.generateSalt();
 		byte[] generatedKey = KeyDerivation.generateKey(password, salt, 100000, 512);
 		assertNotNull(generatedKey);
 		Base64.Encoder encoder = Base64.getEncoder();
