@@ -9,7 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class AES {
 
-    public static String encrypt(String plaintext, byte[] key) {
+	public static String encrypt(String plaintext, byte[] key) {
 		MessageDigest sha = null;
 		try {
 			sha = MessageDigest.getInstance("SHA-512");
@@ -43,6 +43,6 @@ public class AES {
 		}
 
 		return null;
-    }
+	}
 
 }

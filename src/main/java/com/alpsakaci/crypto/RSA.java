@@ -18,7 +18,7 @@ import javax.crypto.spec.PSource;
 
 public class RSA {
 
-    public static KeyPair generateKey() {
+	public static KeyPair generateKey() {
 		KeyPair keyPair = null;
 		try {
 			KeyPairGenerator keygen = KeyPairGenerator.getInstance("RSA");
@@ -26,19 +26,19 @@ public class RSA {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return keyPair;
-    }
-    
-    public static String exportPrivateKey(KeyPair keyPair) {
+	}
+
+	public static String exportPrivateKey(KeyPair keyPair) {
 		return Base64.getEncoder().encodeToString(keyPair.getPrivate().getEncoded());
 	}
-	
+
 	public static String exportPublicKey(KeyPair keyPair) {
 		return Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
-    }
-    
-    public static PublicKey readPublicKey(String key) {
+	}
+
+	public static PublicKey readPublicKey(String key) {
 		PublicKey publicKey = null;
 		try {
 			byte[] privateKeyBytes = Base64.getDecoder().decode(key);
@@ -48,10 +48,10 @@ public class RSA {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return publicKey;
 	}
-	
+
 	public static PrivateKey readPrivateKey(String key) {
 		PrivateKey privateKey = null;
 		try {
@@ -62,17 +62,17 @@ public class RSA {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return privateKey;
-    }
-    
-    public static String encrypt(String plaintext, PublicKey publicKey) {
+	}
+
+	public static String encrypt(String plaintext, PublicKey publicKey) {
 		Base64.Encoder encoder = Base64.getEncoder();
 		byte[] cipherText = null;
 		try {
 			Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
-			cipher.init(Cipher.ENCRYPT_MODE, publicKey, new OAEPParameterSpec("SHA-256",
-			        "MGF1", MGF1ParameterSpec.SHA256, PSource.PSpecified.DEFAULT));
+			cipher.init(Cipher.ENCRYPT_MODE, publicKey,
+					new OAEPParameterSpec("SHA-256", "MGF1", MGF1ParameterSpec.SHA256, PSource.PSpecified.DEFAULT));
 			cipherText = cipher.doFinal(plaintext.getBytes());
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
@@ -84,15 +84,15 @@ public class RSA {
 
 		return encoder.encodeToString(cipherText);
 	}
-	
+
 	public static String decrypt(String cipherText, PrivateKey privateKey) {
 		Base64.Decoder decoder = Base64.getDecoder();
 		byte[] cipherEncoded = decoder.decode(cipherText.getBytes());
 		byte[] plainText = null;
 		try {
 			Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
-			cipher.init(Cipher.DECRYPT_MODE, privateKey, new OAEPParameterSpec("SHA-256",
-			        "MGF1", MGF1ParameterSpec.SHA256, PSource.PSpecified.DEFAULT));
+			cipher.init(Cipher.DECRYPT_MODE, privateKey,
+					new OAEPParameterSpec("SHA-256", "MGF1", MGF1ParameterSpec.SHA256, PSource.PSpecified.DEFAULT));
 			plainText = cipher.doFinal(cipherEncoded);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
@@ -103,6 +103,6 @@ public class RSA {
 		}
 
 		return new String(plainText);
-    }
+	}
 
 }
